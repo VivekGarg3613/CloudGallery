@@ -18,8 +18,9 @@ export default function Login() {
       },
       body: JSON.stringify({ email: email, password: password })
     });
+    let message= await result.json()
 
-    console.log("Status:", result.status);
+    console.log("Status:", result.status, message.message);
 
     if (result.status === 200) {
       nevigate("/mainLayout");
@@ -86,6 +87,7 @@ export default function Login() {
         <button type='submit' className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
           Login
         </button>
+        <button className='text-blue-600 hover:border-b-2 border-blue-600'>Forgot Password</button>
         <br />
         <br/>
         <div className="flex justify-center">
