@@ -15,9 +15,25 @@ const userSchema1 = new mongoose.Schema({
         type: String,
         required:true,
         // unique:true
-    }
+    },
+    reciveOtp:String,
+    // expireTimeOfOtp: Date.now()
 },{timestamps:true})
 
+const verificationOtpSchema = new mongoose.Schema({
+    email:{
+        type:String,
+        required:true
+    },
+    otp:{
+        type:Number,
+        require:true
+    },
+    expireOtp:{
+        type:Number,
+        default: Date.now()*5*60*1000
+    }
+})
 
 const imageSchema= new mongoose.Schema({
     name:{

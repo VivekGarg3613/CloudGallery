@@ -1,10 +1,17 @@
 import { User, Hotels, Image } from "./model/AllSchema.js"
+import nodemailer from "nodemailer";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+
 import bcrypt from "bcrypt";
+
 export const check_user=async(req,res)=>{
     try{
         const {email,password}=req.body
         const result= await User.findOne({email})
-        console.log(result.password)
+        console.log(result.password, 'from their')
 
         if (!result){
             return res.status(404).json({message:'user not found'})
@@ -27,7 +34,7 @@ export const check_user=async(req,res)=>{
 
 
     }catch(e){
-        console.log(e)  
+        console.log(e, 'from catch ')  
         return res.status(500).json({message:'Server error'})
     }   
 }
@@ -113,4 +120,31 @@ export const addHotel=async(req,res)=>{
         console.log(error)
         res.send(error)
     }
+}
+
+export const sendEmail=async(req,res)=>{
+        const userEmail=req.body.email
+        const otp= Math.floor(Math.random()*100000)
+        // console.log(process.env.Email,process.env.Pass,userEmail,otp)
+        try{
+            const transporter=nodemailer.createTransport({
+                service:'gmail',
+                auth:{
+                    user:process.env.Email,
+                    pass:process.env.Pass
+                }
+            })
+            const mailoption= {
+                from:process.env.Email,
+                to:userEmail,
+                subject: 'Your Otp',
+                text: `Your otp is ${otp}`
+            }
+
+            const info= await transporter.sendMail(mailoption)
+            console.log(info)
+
+        }catch(error){
+            console.log(error)
+        }
 }

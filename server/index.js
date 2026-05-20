@@ -6,9 +6,9 @@ import cors from 'cors'
 
 import './db.js'
 
-import { error } from './db.js'
+// import { error } from './db.js'
 
-import { addHotel, all_user, check_user, create_user, delet_allUser, getSchema, ReturnImage, updataSchema } from './function.js'
+import { addHotel, all_user, check_user, create_user, delet_allUser, getSchema, ReturnImage, updataSchema, sendEmail } from './function.js'
 
 import upload from './middleware/mutler.js';
 
@@ -25,9 +25,9 @@ console.log(process.env.CLOUD_NAME);
 const app=express()
 app.use(express.json())
 app.use(cors())
-console.log(error)
+// console.log(error)
 
-
+app.post('/forgotPassword',sendEmail)
 app.post('/check_user',check_user)
 app.post('/upload', upload.single('image'), uploadImage)
 
