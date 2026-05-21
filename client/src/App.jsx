@@ -5,6 +5,7 @@ import { createBrowserRouter,RouterProvider,Route,Routes, createRoutesFromElemen
 import {Home,About,Contact,Github,Login,SignIn,LoginHeader} from './main_import'
 
 import Upload from './pages/Upload.jsx'
+import ChangePassword from './pages/Login/ChangePassword.jsx'
 // import Video from './Home/InsideHome/Video.jsx'
 // import { Calculator } from './Home/InnerSide/Calculater'
 // import CurrencyConverter from './Home/InnerSide/currencyConverter'
@@ -17,6 +18,9 @@ function App() {
       {path:'/SignIn', element:<SignIn/>}
     ]
    },
+  {
+    path:'/forgotpassword', element: <ChangePassword/>
+  },
    {path:'/mainLayout',element:<MainLayout/>, 
     children:[
       {path:"", element:<Home/>},

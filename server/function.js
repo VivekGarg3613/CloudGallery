@@ -142,7 +142,7 @@ export const sendEmail=async(req,res)=>{
             }
 
             const info= await transporter.sendMail(mailoption)
-            console.log(info)
+            
 
         }catch(error){
             console.log(error)

@@ -6,6 +6,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [userExist,setUserExist]=useState(false);
 
+   
 
   const handleSubmit = async (e) => {
   e.preventDefault();
@@ -55,7 +56,6 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-800">
       <form
-        autoComplete="off"
         onSubmit={handleSubmit}
         className="bg-gray-700 p-8 rounded-xl shadow-md w-80"
       >
@@ -71,7 +71,6 @@ export default function Login() {
             className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-
         <div className="mb-5">
           <label className="block text-sm mb-1">Password</label>
           <input
@@ -87,7 +86,7 @@ export default function Login() {
         <button type='submit' className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
           Login
         </button>
-        <button className='text-blue-600 hover:border-b-2 border-blue-600'>Forgot Password</button>
+        <button type="button" onClick={()=>{}} className='text-blue-600 hover:border-b-2 border-blue-600'>Forgot Password</button>
         <br />
         <br/>
         <div className="flex justify-center">
@@ -100,16 +99,22 @@ export default function Login() {
         <br />
         {userExist&& <p className="text-red-500 text-sm text-center">You don't have any account
           </p>}
-        <button type="button" className="bg-blue-500 p-2 rounded-md text-white mr-2" onClick={changeindex}>updataSchema</button>
-        {/* 
+        
+        
+
+        
+
+
+
+        
+        {/*
+        <button type="button" className="bg-blue-500 p-2 rounded-md text-white mr-2" onClick={changeindex}>updataSchema</button> 
+        <button type="button" className="bg-blue-500 p-2 rounded-md text-white mr-2 mt-2" onClick={deleteuser}>delete all user</button>
+        <button type='button' className='bg-blue-600 text-white p-2 rounded-md'onClick={()=>{allusers()}}>all_user</button> 
         <button type="button" className="bg-blue-500 p-2 rounded-md text-white" onClick={
           async()=>{const data=await fetch('http://localhost:4000/getSchema')
             data.json().then((e)=>{console.log(e)})
-          }}>getindex</button>
-
-        <button type="button" className="bg-blue-500 p-2 rounded-md text-white mr-2 mt-2" onClick={deleteuser}>delete all user</button> */}
-        <button type='button' className='bg-blue-600 text-white p-2 rounded-md'onClick={()=>{allusers()}}>all_user</button>
-        {/* <button type='button' className='bg-blue-600 text-white p-2 rounded-md' onClick={()=>{deleteuser()}}>deleteuser</button> */}
+          }}>getindex</button> */}
       </form>
       
      

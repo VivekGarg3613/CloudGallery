@@ -2,12 +2,23 @@ import { useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 export default function SignIn() {
+  const [emailVerification, setemailVerification]=useState(false)
   const [data, setdata] = useState({
     name: "",
     email: "",
     password: ""
   });
   const [statusMessage,setstatusMessage]=useState('')
+
+  async function verifyemailFunction(){
+      let result = await fetch('http://localhost:4000/forgotPassword',{
+        method:'POST',
+        headers:{
+        "Content-Type": "application/json"
+      },
+      body:JSON.stringify({ email: data.email})
+      })
+  }
 
   async function handelSubmit(e) {
     e.preventDefault();
@@ -42,20 +53,8 @@ export default function SignIn() {
         <form 
         className="space-y-4" onSubmit={handelSubmit}>
 
-          <div>
-            <label className="block mb-1 text-sm text-gray-400">Name</label>
-            <input
-              type="text"
-              value={data.name}
-              required={true}
-              min={3}
-              placeholder="Enter your name"
-              className="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-500"
-              onChange={(e) => {
-                setdata({ ...data, name: e.target.value });
-              }}
-            />
-          </div>
+          
+          {/* Email portion start here */}
 
           <div>
             <label className="block mb-1 text-sm text-gray-400">Email</label>
@@ -69,9 +68,31 @@ export default function SignIn() {
                 setdata({ ...data, email: e.target.value });
               }}
             />
+            <button type='button' className='text-blue-600 hover:border-b-2 border-blue-600' onClick={()=>{verifyemailFunction()}}>Verify_Email</button>
           </div>
 
-          <div>
+
+          {/* Name portion start here */}
+
+
+          {emailVerification && <div>
+            <label className="block mb-1 text-sm text-gray-400">Name</label>
+            <input
+              type="text"
+              value={data.name}
+              required={true}
+              min={3}
+              placeholder="Enter your name"
+              className="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-500"
+              onChange={(e) => {
+                setdata({ ...data, name: e.target.value });
+              }}
+            />
+          </div>}
+            
+            {/* Password portion start here */}
+          {emailVerification &&
+            <div>
             <label className="block mb-1 text-sm text-gray-400">Password</label>
             <input
               type="password"
@@ -88,6 +109,7 @@ export default function SignIn() {
               }}
             />
           </div>
+          }
 
           <button
             type="submit"
