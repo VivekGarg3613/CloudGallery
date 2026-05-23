@@ -122,9 +122,7 @@ export const addHotel=async(req,res)=>{
     }
 }
 
-function mynameFunction(){
 
-}
 
 export const sendEmail=async(req,res)=>{
         const userEmail=req.body.email
